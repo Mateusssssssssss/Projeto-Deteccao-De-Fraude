@@ -27,6 +27,9 @@ print(f'Quantidade de Fraudes: {fraude}')
 nao_fraude = (dados['Class'] == 0).sum()
 print(f'Quantidade de Fraudes: {nao_fraude}')
 
+#Verifica a correlação das colunas em relação a coluna Class
+correlacao = dados.corr()[['Class']].sort_values(by='Class', ascending=False)
+
 
 
 

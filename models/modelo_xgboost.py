@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
@@ -8,10 +12,8 @@ from imblearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_curve
 import seaborn as sb
-import notebooks.eda as dados 
+from notebooks.eda import *
 
-#Verifica a correlação das colunas em relação a coluna Class
-correlacao = dados.corr()[['Class']].sort_values(by='Class', ascending=False)
 
 #Verifica as colunas as 5 colunas com maiores correlação negativa e positiva
 top_5_positivas = correlacao[1:6] 
@@ -30,7 +32,7 @@ majoritaria = RandomUnderSampler(sampling_strategy = 0.1)
 # SMOTE(sampling_strategy=0.5): aumentando a classe minoritária para 50% 
 # do tamanho da classe majoritária, ou seja, a classe minoritária será aumentada para 
 # ser 1,5 vezes maior que a classe majoritária após o balanceamento.
-minioritaria = SMOTE(sampling_strategy=0.5)
+minioritaria = SMOTE(sampling_strategy=0.6)
 
 #Matrix
 previsores = dados[columns_corr].values
